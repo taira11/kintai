@@ -1,0 +1,8 @@
+{
+    "require": {
+        "laravel/fortify": "^1.32"
+    },
+    "require-dev": {
+        "laravel-lang/lang": "~7.0"
+    }
+}

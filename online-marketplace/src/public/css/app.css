@@ -1,0 +1,291 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+    "游ゴシック", YuGothic, "メイリオ", sans-serif;
+}
+
+.header {
+    width: 100%;
+    background: #000;
+    padding: 8px 0;
+}
+
+.header__inner {
+    width: 980px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.logo {
+    height: 26px;
+    display: block;
+}
+
+.search-form {
+    flex: 1;
+}
+
+.search-form input {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 3px;
+    border: none;
+    font-size: 12px;
+}
+
+.header-nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 12px;
+}
+
+.header-nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.header-nav a:hover {
+    text-decoration: underline;
+}
+
+.header-nav .sell-btn {
+    background: #fff;
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.container {
+    width: 980px;
+    max-width: 100%;
+    margin: 32px auto 40px;
+}
+
+.items-page__tabs {
+    display: flex;
+    gap: 16px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.items-page__tab {
+    color: #333;
+    text-decoration: none;
+}
+
+.items-page__tab.is-active {
+    font-weight: 700;
+    border-bottom: 2px solid #ff5555;
+    padding-bottom: 4px;
+}
+
+.items-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+}
+
+.item-card {
+    display: block;
+    text-decoration: none;
+    color: #333;
+}
+
+.item-card__image {
+    background: #f2f2f2;
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.item-card__image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-card__image span {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 12px;
+}
+
+.item-card__body {
+    margin-top: 8px;
+}
+
+.item-card__name {
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.item-card__price {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.item-card__brand {
+    font-size: 11px;
+    color: #777;
+}
+
+.detail-page {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.detail-left img,
+.detail-image-placeholder {
+    width: 520px;
+    height: 520px;
+    background: #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 16px;
+}
+
+.detail-right {
+    width: 600px;
+}
+
+.detail-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.detail-brand {
+    font-size: 14px;
+    color: #555;
+}
+
+.detail-price {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 16px 0;
+}
+
+.detail-tax {
+    font-size: 14px;
+    color: #555;
+}
+
+.detail-icons {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.detail-like,
+.detail-comment {
+    text-align: center;
+    font-size: 14px;
+}
+
+.detail-buy-btn {
+    display: inline-block;
+    width: 260px;
+    text-align: center;
+    background: #ff5555;
+    padding: 10px 0;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 16px 0 30px;
+}
+
+.detail-section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 24px 0 12px;
+}
+
+.detail-text {
+    line-height: 1.6;
+}
+
+.detail-info-row {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.detail-info-label {
+    width: 120px;
+    font-weight: bold;
+}
+
+.detail-info-value {
+    flex: 1;
+}
+
+.detail-tag {
+    background: #eee;
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-right: 8px;
+    font-size: 12px;
+}
+
+.detail-comment-box {
+    display: flex;
+    gap: 12px;
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.detail-comment-icon {
+    width: 36px;
+    height: 36px;
+    background: #ddd;
+    border-radius: 50%;
+}
+
+.comment-user {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.comment-text {
+    font-size: 13px;
+    color: #555;
+}
+
+.detail-textarea {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+.detail-comment-btn {
+    width: 100%;
+    background: #ff5555;
+    padding: 12px 0;
+    border-radius: 6px;
+    margin-top: 16px;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
