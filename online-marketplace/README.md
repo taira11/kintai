@@ -135,3 +135,26 @@ CVC：任意の3桁
 商品画像は ダウンロード済み素材を storage に保存 して使用
 
 php artisan db:seed
+
+## メール送信（Mailtrap）
+
+本アプリでは、会員登録時のメール認証に Mailtrap を使用しています。
+
+開発環境でメール送信を確認するため、以下の手順で Mailtrap の設定を行ってください。
+
+### Mailtrap 設定手順
+
+1. https://mailtrap.io にアクセスしてアカウントを作成
+2. Inbox を作成
+3. SMTP 設定を確認
+4. `.env` に以下を設定
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=xxxxxxxx
+MAIL_PASSWORD=xxxxxxxx
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=no-reply@example.com
+MAIL_FROM_NAME="COACHTECH フリマ"
