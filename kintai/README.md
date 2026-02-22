@@ -44,13 +44,16 @@ PHPUnit による要件ベースの自動テストを実装し、
 ---
 
 ## Docker ビルド
+```env
 git clone https://github.com/taira11/kintai.git
 
 cd kintai
 
 docker-compose up -d --build
+```
 
 ## Laravel 環境構築
+```env
 docker-compose exec php bash
 
 composer install
@@ -58,6 +61,7 @@ composer install
 cp .env.example .env
 
 php artisan key:generate
+```
 
 .env以下修正
 ```env
@@ -71,8 +75,10 @@ DB_PASSWORD=laravel_pass
 
 php artisan migrate
 
-## ダミーデータについて
+## ダミーデータ
+```env
 php artisan migrate:fresh --seed
+```
 
 ### Mailtrap 設定手順
 
