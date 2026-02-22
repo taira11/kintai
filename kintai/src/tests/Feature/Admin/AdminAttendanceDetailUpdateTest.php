@@ -53,7 +53,7 @@ class AdminAttendanceDetailUpdateTest extends TestCase
         $user = $this->normalUser();
         $attendance = $this->seedAttendanceWithBreaks($user, '2026-02-22');
 
-        $res = $this->actingAs($admin, 'admin')->get(
+        $res = $this->actingAs($admin)->get(
             route('admin.attendance.show', ['attendance' => $attendance->id])
         );
 
@@ -79,7 +79,7 @@ class AdminAttendanceDetailUpdateTest extends TestCase
         $user = $this->normalUser();
         $attendance = $this->seedAttendanceWithBreaks($user, '2026-02-22');
 
-        $res = $this->actingAs($admin, 'admin')
+        $res = $this->actingAs($admin)
             ->from(route('admin.attendance.show', ['attendance' => $attendance->id]))
             ->post(route('admin.attendance.update', ['attendance' => $attendance->id]), [
                 'clock_in' => '18:00',
@@ -93,7 +93,7 @@ class AdminAttendanceDetailUpdateTest extends TestCase
 
         $res->assertRedirect(route('admin.attendance.show', ['attendance' => $attendance->id]));
 
-        $follow = $this->actingAs($admin, 'admin')->get(
+        $follow = $this->actingAs($admin)->get(
             route('admin.attendance.show', ['attendance' => $attendance->id])
         );
 
@@ -107,7 +107,7 @@ class AdminAttendanceDetailUpdateTest extends TestCase
         $user = $this->normalUser();
         $attendance = $this->seedAttendanceWithBreaks($user, '2026-02-22');
 
-        $res = $this->actingAs($admin, 'admin')
+        $res = $this->actingAs($admin)
             ->from(route('admin.attendance.show', ['attendance' => $attendance->id]))
             ->post(route('admin.attendance.update', ['attendance' => $attendance->id]), [
                 'clock_in' => '09:00',
@@ -121,7 +121,7 @@ class AdminAttendanceDetailUpdateTest extends TestCase
 
         $res->assertRedirect(route('admin.attendance.show', ['attendance' => $attendance->id]));
 
-        $follow = $this->actingAs($admin, 'admin')->get(
+        $follow = $this->actingAs($admin)->get(
             route('admin.attendance.show', ['attendance' => $attendance->id])
         );
 
@@ -135,7 +135,7 @@ class AdminAttendanceDetailUpdateTest extends TestCase
         $user = $this->normalUser();
         $attendance = $this->seedAttendanceWithBreaks($user, '2026-02-22');
 
-        $res = $this->actingAs($admin, 'admin')
+        $res = $this->actingAs($admin)
             ->from(route('admin.attendance.show', ['attendance' => $attendance->id]))
             ->post(route('admin.attendance.update', ['attendance' => $attendance->id]), [
                 'clock_in' => '09:00',
@@ -149,7 +149,7 @@ class AdminAttendanceDetailUpdateTest extends TestCase
 
         $res->assertRedirect(route('admin.attendance.show', ['attendance' => $attendance->id]));
 
-        $follow = $this->actingAs($admin, 'admin')->get(
+        $follow = $this->actingAs($admin)->get(
             route('admin.attendance.show', ['attendance' => $attendance->id])
         );
 
@@ -163,7 +163,7 @@ class AdminAttendanceDetailUpdateTest extends TestCase
         $user = $this->normalUser();
         $attendance = $this->seedAttendanceWithBreaks($user, '2026-02-22');
 
-        $res = $this->actingAs($admin, 'admin')
+        $res = $this->actingAs($admin)
             ->from(route('admin.attendance.show', ['attendance' => $attendance->id]))
             ->post(route('admin.attendance.update', ['attendance' => $attendance->id]), [
                 'clock_in' => '09:00',
@@ -177,7 +177,7 @@ class AdminAttendanceDetailUpdateTest extends TestCase
 
         $res->assertRedirect(route('admin.attendance.show', ['attendance' => $attendance->id]));
 
-        $follow = $this->actingAs($admin, 'admin')->get(
+        $follow = $this->actingAs($admin)->get(
             route('admin.attendance.show', ['attendance' => $attendance->id])
         );
 

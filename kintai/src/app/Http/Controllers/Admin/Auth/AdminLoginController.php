@@ -17,20 +17,20 @@ class AdminLoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (! Auth::guard('admin')->attempt($credentials)) {
+        if (!Auth::attempt($credentials)) {
             return back()
-                ->withErrors(['email' => 'ログイン情報が登録されていません'])
-                ->withInput();
+            ->withErrors(['email' => 'ログイン情報が登録されていません'])
+            ->withInput();
         }
 
-        $user = Auth::guard('admin')->user();
+        $user = Auth::user();
 
         if (($user->role ?? null) !== 'admin') {
-            Auth::guard('admin')->logout();
+            Auth::logout();
 
             return back()
-                ->withErrors(['email' => 'ログイン情報が登録されていません'])
-                ->withInput();
+            ->withErrors(['email' => 'ログイン情報が登録されていません'])
+            ->withInput();
         }
 
         return redirect()->route('admin.attendance.list');
@@ -38,8 +38,7 @@ class AdminLoginController extends Controller
 
     public function logout()
     {
-        Auth::guard('admin')->logout();
-
+        Auth::logout();
         return redirect('/admin/login');
     }
 }

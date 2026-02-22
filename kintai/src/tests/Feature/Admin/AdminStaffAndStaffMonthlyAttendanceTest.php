@@ -71,7 +71,7 @@ class AdminStaffAndStaffMonthlyAttendanceTest extends TestCase
             'email' => 'hanako@example.com',
         ]);
 
-        $res = $this->actingAs($admin, 'admin')->get(route('admin.staff.list'));
+        $res = $this->actingAs($admin)->get(route('admin.staff.list'));
         $res->assertOk();
 
         $res->assertSee($u1->name);
@@ -98,7 +98,7 @@ class AdminStaffAndStaffMonthlyAttendanceTest extends TestCase
 
         $this->seedAttendance($user, '2026-01-15', '08:00', '17:00');
 
-        $res = $this->actingAs($admin, 'admin')->get(route('admin.attendance.staff', [
+        $res = $this->actingAs($admin)->get(route('admin.attendance.staff', [
             'user'  => $user->id,
             'month' => '2026-02',
         ]));
@@ -124,7 +124,7 @@ class AdminStaffAndStaffMonthlyAttendanceTest extends TestCase
         $this->seedAttendance($user, '2026-01-20', '08:00', '17:00');
         $this->seedAttendance($user, '2026-02-20', '09:00', '18:00');
 
-        $res = $this->actingAs($admin, 'admin')->get(route('admin.attendance.staff', [
+        $res = $this->actingAs($admin)->get(route('admin.attendance.staff', [
             'user'  => $user->id,
             'month' => '2026-01',
         ]));
@@ -148,7 +148,7 @@ class AdminStaffAndStaffMonthlyAttendanceTest extends TestCase
         $this->seedAttendance($user, '2026-03-05', '11:00', '20:00');
         $this->seedAttendance($user, '2026-02-05', '09:00', '18:00');
 
-        $res = $this->actingAs($admin, 'admin')->get(route('admin.attendance.staff', [
+        $res = $this->actingAs($admin)->get(route('admin.attendance.staff', [
             'user'  => $user->id,
             'month' => '2026-03',
         ]));
@@ -171,7 +171,7 @@ class AdminStaffAndStaffMonthlyAttendanceTest extends TestCase
 
         $attendance = $this->seedAttendance($user, '2026-02-12', '09:00', '18:00');
 
-        $res = $this->actingAs($admin, 'admin')->get(route('admin.attendance.staff', [
+        $res = $this->actingAs($admin)->get(route('admin.attendance.staff', [
             'user' => $user->id,
         ]));
         $res->assertOk();
@@ -179,7 +179,7 @@ class AdminStaffAndStaffMonthlyAttendanceTest extends TestCase
         $detailUrl = route('admin.attendance.show', ['attendance' => $attendance->id]);
         $res->assertSee($detailUrl);
 
-        $detail = $this->actingAs($admin, 'admin')->get($detailUrl);
+        $detail = $this->actingAs($admin)->get($detailUrl);
         $detail->assertOk();
         $detail->assertSee('09:00');
         $detail->assertSee('18:00');

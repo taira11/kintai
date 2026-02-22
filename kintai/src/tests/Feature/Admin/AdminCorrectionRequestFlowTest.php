@@ -95,7 +95,7 @@ class AdminCorrectionRequestFlowTest extends TestCase
         $this->createChangeRequest($a2, $u2, 'pending', 'clock_out_at', '2026-02-22 19:30:00', '2026-02-22 19:00:00', '電車遅延B');
         $this->createChangeRequest($a1, $u1, 'approved', 'clock_out_at', '2026-02-22 18:30:00', '2026-02-22 18:00:00', '承認済みは出ない');
 
-        $res = $this->actingAs($admin, 'admin')->get(
+        $res = $this->actingAs($admin)->get(
             route('admin.correction.list', ['tab' => 'pending'])
         );
 
@@ -120,7 +120,7 @@ class AdminCorrectionRequestFlowTest extends TestCase
         $this->createChangeRequest($a1, $u1, 'pending', 'clock_in_at', '2026-02-22 09:30:00', '2026-02-22 09:00:00', 'pendingは出ない');
         $this->createChangeRequest($a1, $u1, 'approved', 'clock_out_at', '2026-02-22 18:30:00', '2026-02-22 18:00:00', '承認済み表示OK');
 
-        $res = $this->actingAs($admin, 'admin')->get(
+        $res = $this->actingAs($admin)->get(
             route('admin.correction.list', ['tab' => 'approved'])
         );
 
@@ -151,7 +151,7 @@ class AdminCorrectionRequestFlowTest extends TestCase
             '電車遅延のため'
         );
 
-        $res = $this->actingAs($admin, 'admin')->get(
+        $res = $this->actingAs($admin)->get(
             route('admin.correction.approve.show', ['changeRequest' => $req->id])
         );
 
@@ -186,7 +186,7 @@ class AdminCorrectionRequestFlowTest extends TestCase
             '電車遅延のため'
         );
 
-        $res = $this->actingAs($admin, 'admin')
+        $res = $this->actingAs($admin)
             ->withHeader('Accept', 'application/json')
             ->post(route('admin.correction.approve', ['changeRequest' => $req->id]));
 

@@ -47,7 +47,7 @@ PHPUnit による要件ベースの自動テストを実装し、
 ```env
 git clone https://github.com/taira11/kintai.git
 
-cd kintai
+cd kintai/kintai
 
 docker-compose up -d --build
 ```
@@ -78,7 +78,30 @@ DB_PASSWORD=laravel_pass
 php artisan migrate
 ```
 
-## ダミーデータ
+---
+
+## 🔐 テスト用ログイン情報
+
+Seeder により、以下のユーザーが作成されます。
+
+### 🛠 管理者アカウント
+
+- メールアドレス：admin@example.com
+- パスワード：password
+- ロール：admin
+- ログインURL：http://localhost/admin/login
+
+---
+
+### 👤 一般ユーザーアカウント
+
+- メールアドレス：user@example.com
+- パスワード：password
+- ロール：user
+- ログインURL：http://localhost/login
+
+※ 一般ユーザーはメール認証済み状態で作成されています。
+
 ```env
 php artisan migrate:fresh --seed
 ```
@@ -111,3 +134,24 @@ MAIL_FROM_NAME="COACHTECH"
 ログイン:http://localhost/admin/login
 
 phpMyAdmin:http://localhost:8080
+
+## テスト
+PHPUnit を使用してテストを実装しています。
+```env
+php artisan test
+```
+
+## テスト内容（一部）
+出勤 / 退勤処理
+
+休憩処理（複数回対応）
+
+勤怠ステータス表示
+
+月次一覧表示
+
+修正申請承認フロー
+
+管理者機能
+
+メール認証
