@@ -155,3 +155,7 @@ php artisan test
 管理者機能
 
 メール認証
+
+## DB設計書
+
+![ER図](kintai/.drawio.png)
