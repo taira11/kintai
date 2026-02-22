@@ -58,17 +58,65 @@ php artisan migrate
 テストデータ投入：
 php artisan migrate:fresh --seed
 
-# ✉ メール認証（Mailtrap）
+
+---
+
+# メール認証（Mailtrap）
 
 本アプリではメール認証に Mailtrap を使用しています。
-
 設定手順
 
-https://mailtrap.io
- に登録
+1 https://mailtrap.ioに登録
+2 Sandbox 作成
+3 SMTP情報取得
+4 .env に設定
 
-Sandbox 作成
+```bash
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=xxxxx
+MAIL_PASSWORD=xxxxx
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=no-reply@example.com
+MAIL_FROM_NAME="勤怠管理アプリ"
 
-SMTP情報取得
+---
 
-.env に設定
+# 🌐 開発環境URL
+
+アプリトップ	http://localhost
+会員登録	http://localhost/register
+ログイン	http://localhost/login
+管理者ログイン	http://localhost/admin/login
+phpMyAdmin	http://localhost:8080
+
+---
+
+# ⚙ 使用技術
+
+---
+
+# ⚙ 使用技術
+## 勤怠打刻
+- 出勤
+- 退勤
+- 休憩入
+- 休憩戻
+- ステータス自動表示
+（勤務外 / 出勤中 / 休憩中 / 退勤済）
+
+
+
+
+---
+
+# ⚙ 使用技術
+
+---
+
+# ⚙ 使用技術
+
+---
+
+# ⚙ 使用技術
