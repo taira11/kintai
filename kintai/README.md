@@ -73,7 +73,10 @@ DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 ```
 
+## マイグレーション
+```env
 php artisan migrate
+```
 
 ## ダミーデータ
 ```env
