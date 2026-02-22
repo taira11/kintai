@@ -158,4 +158,4 @@ php artisan test
 
 ## DB設計書
 
-![ER図](kintai/.drawio.png)
+![ER図](docs/db/erd.png)
