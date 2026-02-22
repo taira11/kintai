@@ -19,8 +19,8 @@ class AdminLoginController extends Controller
 
         if (!Auth::attempt($credentials)) {
             return back()
-            ->withErrors(['email' => 'ログイン情報が登録されていません'])
-            ->withInput();
+                ->withErrors(['email' => 'ログイン情報が登録されていません'])
+                ->withInput();
         }
 
         $user = Auth::user();
@@ -29,9 +29,11 @@ class AdminLoginController extends Controller
             Auth::logout();
 
             return back()
-            ->withErrors(['email' => 'ログイン情報が登録されていません'])
-            ->withInput();
+                ->withErrors(['email' => 'ログイン情報が登録されていません'])
+                ->withInput();
         }
+
+        $request->session()->regenerate();
 
         return redirect()->route('admin.attendance.list');
     }
@@ -39,6 +41,7 @@ class AdminLoginController extends Controller
     public function logout()
     {
         Auth::logout();
+
         return redirect('/admin/login');
     }
 }
