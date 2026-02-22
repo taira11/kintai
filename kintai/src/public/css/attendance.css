@@ -1,0 +1,93 @@
+:root{
+  --header-h: 80px;
+}
+
+.container{
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #f5f5f5 !important;
+  min-height: calc(100vh - var(--header-h)) !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  padding-top: 160px !important;
+}
+
+.attendance-page{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.badge{
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: #d7d7d7;
+  color: #555;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0 0 18px;
+}
+
+.date{
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+.time{
+  font-size: 64px;
+  font-weight: 900;
+  margin: 0 0 24px;
+}
+
+.btn-row{
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.btn{
+  min-width: 170px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,.08);
+}
+
+.btn--black{
+  background: #111;
+  color: #fff;
+}
+
+.btn--white{
+  background: #fff;
+  color: #111;
+  border: 1px solid #e6e6e6;
+}
+
+.btn--single{
+  min-width: 160px;
+}
+
+.btn:active{
+  transform: translateY(1px);
+}
+
+.done-message{
+  margin: 18px 0 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: #111;
+}
