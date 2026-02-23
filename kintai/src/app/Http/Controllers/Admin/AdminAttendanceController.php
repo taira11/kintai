@@ -250,25 +250,100 @@ class AdminAttendanceController extends Controller
     public function csv(Request $request, User $user)
     {
         $ym = $request->query('month') ?? now()->format('Y-m');
-        $month = Carbon::createFromFormat('Y-m', $ym);
+        $month = Carbon::createFromFormat('Y-m', $ym)->startOfMonth();
+        $start = $month->copy()->startOfMonth()->toDateString();
+        $end   = $month->copy()->endOfMonth()->toDateString();
 
-        $attendances = Attendance::where('user_id', $user->id)
-            ->whereYear('work_date', $month->year)
-            ->whereMonth('work_date', $month->month)
-            ->with('breaks')
-            ->get();
+        $attendances = Attendance::query()
+        ->where('user_id', $user->id)
+        ->whereBetween('work_date', [$start, $end])
+        ->with('breaks')
+        ->get()
+        ->keyBy(fn ($a) => Carbon::parse($a->work_date)->toDateString());
 
-        $csv = "日付,出勤,退勤\n";
+        $header = ['日付', '出勤', '退勤', '休憩', '合計'];
+        $lines = [];
+        $lines[] = $this->csvLine($header);
 
-        foreach ($attendances as $a) {
-            $csv .= $a->work_date->format('Y-m-d') . ",";
-            $csv .= optional($a->clock_in_at)->format('H:i') . ",";
-            $csv .= optional($a->clock_out_at)->format('H:i') . "\n";
+        $cursor = $month->copy()->startOfMonth();
+        $last   = $month->copy()->endOfMonth();
+
+        while ($cursor->lte($last)) {
+            $dateKey = $cursor->toDateString();
+            $a = $attendances->get($dateKey);
+
+            $clockIn  = $a?->clock_in_at  ? Carbon::parse($a->clock_in_at)->format('H:i') : '';
+            $clockOut = $a?->clock_out_at ? Carbon::parse($a->clock_out_at)->format('H:i') : '';
+
+            $breakMinutes = 0;
+            if ($a) {
+                foreach ($a->breaks as $b) {
+                    if ($b->break_in_at && $b->break_out_at) {
+                        $breakMinutes += Carbon::parse($b->break_in_at)
+                        ->diffInMinutes(Carbon::parse($b->break_out_at));
+                    }
+                }
+            }
+
+            $total = '';
+            if ($a && $a->clock_in_at && $a->clock_out_at) {
+                $workMinutes  = $a->clock_in_at->diffInMinutes($a->clock_out_at);
+                $totalMinutes = max(0, $workMinutes - $breakMinutes);
+                $total = $this->fmtMinutes($totalMinutes);
+            }
+
+            $lines[] = $this->csvLine([
+                $cursor->format('m/d') . '(' . $this->jpDow($cursor) . ')',
+                $clockIn,
+                $clockOut,
+                $a ? $this->fmtMinutes($breakMinutes) : '',
+                $total,
+            ]);
+
+            $cursor->addDay();
         }
 
-        return response($csv)
-            ->header('Content-Type', 'text/csv')
-            ->header('Content-Disposition', 'attachment; filename=\"attendance.csv\"');
+        $csv = implode("\r\n", $lines) . "\r\n";
+        $csv = "\xEF\xBB\xBF" . $csv;
+
+        $rawName = trim((string) $user->name);
+
+        $safeName = preg_replace('/[^A-Za-z0-9_\-]/', '_', $rawName);
+        if (!$safeName) {
+            $safeName = 'user_' . $user->id;
+        }
+
+        $fileNameAscii = $safeName . '_' . $month->format('Y-m') . '_attendance.csv';
+        $fileNameUtf8  = ($rawName !== '' ? $rawName : ('user_' . $user->id))
+        . '_' . $month->format('Y-m') . '_attendance.csv';
+
+        return response($csv, 200, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' =>
+            "attachment; filename=\"{$fileNameAscii}\"; filename*=UTF-8''" . rawurlencode($fileNameUtf8),
+        ]);
+    }
+
+    private function csvLine(array $cols): string
+    {
+        $escaped = array_map(function ($v) {
+            $v = (string)($v ?? '');
+            $v = str_replace('"', '""', $v);
+            return '"' . $v . '"';
+        }, $cols);
+        return implode(',', $escaped);
+    }
+
+    private function fmtMinutes(int $minutes): string
+    {
+        $h = intdiv($minutes, 60);
+        $m = $minutes % 60;
+        return sprintf('%d:%02d', $h, $m);
+    }
+
+    private function jpDow(Carbon $d): string
+    {
+        return ['日','月','火','水','木','金','土'][$d->dayOfWeek];
     }
 
     private function minutesToHhmm(int $minutes): string

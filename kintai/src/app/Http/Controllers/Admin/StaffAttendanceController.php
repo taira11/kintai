@@ -144,7 +144,15 @@ class StaffAttendanceController extends Controller
         $csv = implode("\r\n", $lines) . "\r\n";
         $csv = "\xEF\xBB\xBF" . $csv;
 
-        $fileName = sprintf('%s_%s_%s.csv', $user->name, $month->format('Y-m'), 'attendance');
+        $rawName = trim((string) $user->name);
+
+        $safeName = Str::slug($rawName);
+        if ($safeName === '') {
+            $safeName = 'user-' . $user->id;
+        }
+
+        $fileNameAscii = sprintf('%s_%s_attendance.csv', $safeName, $month->format('Y-m'));
+        $fileName = 'attendance_' . $user->id . '_' . $month->format('Y-m') . '.csv';
 
         return response($csv, 200, [
             'Content-Type'        => 'text/csv; charset=UTF-8',
