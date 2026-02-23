@@ -21,6 +21,7 @@ class AdminMiddleware
         if (!$user || ($user->role ?? null) !== 'admin') {
             abort(403);
         }
-    return $next($request);
+
+        return $next($request);
     }
 }

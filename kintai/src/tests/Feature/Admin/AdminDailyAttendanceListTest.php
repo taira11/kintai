@@ -43,7 +43,7 @@ class AdminDailyAttendanceListTest extends TestCase
             'clock_out_at' => '2026-02-22 19:00:00',
         ]);
 
-        $response = $this->actingAs($admin)->get(route('admin.attendance.list'));
+        $response = $this->actingAs($admin, 'admin')->get(route('admin.attendance.list'));
 
         $response->assertOk();
 
@@ -73,7 +73,7 @@ class AdminDailyAttendanceListTest extends TestCase
             'clock_out_at' => '2026-02-21 18:00:00',
         ]);
 
-        $response = $this->actingAs($admin)->get(
+        $response = $this->actingAs($admin, 'admin')->get(
             route('admin.attendance.list', ['date' => '2026-02-21'])
         );
 
@@ -95,7 +95,7 @@ class AdminDailyAttendanceListTest extends TestCase
             'clock_out_at' => '2026-02-23 18:00:00',
         ]);
 
-        $response = $this->actingAs($admin)->get(
+        $response = $this->actingAs($admin, 'admin')->get(
             route('admin.attendance.list', ['date' => '2026-02-23'])
         );
 
